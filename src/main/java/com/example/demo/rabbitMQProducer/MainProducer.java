@@ -16,21 +16,19 @@ public class MainProducer {
             if (result.succeeded()) {
                 JsonArray lis = data.getJsonArray("deploy2");
                 for (Object s : lis) {
-                    // create config
                     JsonObject innerList = new JsonObject(s.toString());
                     DeploymentOptions options = new DeploymentOptions().setConfig(innerList);
-                    // deploy verticles
                     vertx.deployVerticle(innerList.getString("name"), options, res -> {
                         if (res.succeeded()) {
-                            // map NAME with ID (NAME IS UN_DEPLOY_NAME IN CONFIG)-> a short name of verticle
                             JsonObject deployment = new JsonObject()
                                     .put("name",innerList.getString("un_deploy_name"))
                                     .put("id",res.result());
-                            vertx.eventBus().publish("undeploy.deployment", deployment);
-                            // map name with config
+
                             JsonObject mapNameConfig = new JsonObject()
                                     .put("name",innerList.getString("un_deploy_name"))
                                     .put("config",innerList);
+
+                            vertx.eventBus().publish("undeploy.deployment", deployment);
                             vertx.eventBus().publish("undeploy.mapNameConfig", mapNameConfig);
                         } else {
                             System.out.println("Deployment failed");
@@ -41,5 +39,23 @@ public class MainProducer {
                 System.err.println("Fail to read file" + result.cause());
             }
         });
+
+//        vertx.deployVerticle(new RabbitMqProducerService(), res -> {
+//            if (res.succeeded()) {
+//                deploymentID[0] = res.result();
+//                System.out.println("Deployment is " + res.result());
+//            } else {
+//                System.out.println("Deployment failed");
+//            }
+//        });
+//        vertx.setTimer(5000, id->{
+//            vertx.undeploy(deploymentID[0],res->{
+//                if (res.succeeded()) {
+//                    System.out.println("Undeploy OKE");
+//                } else {
+//                    System.out.println("Undeploy failed");
+//                }
+//            });
+//        });
     }
 }

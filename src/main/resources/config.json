@@ -21,7 +21,7 @@
   "deploy2": [
     {
       "name": "com.example.demo.rabbitMQConsumer.RabbitMqConsumerService",
-      "un_deploy_name" : "consumer",
+      "un_deploy_name": "consumer",
       "data": "hehe",
       "queue_name": "queue2",
       "queue_name_reply": "queue2.reply-to",
@@ -30,8 +30,13 @@
     },
     {
       "name": "com.example.demo.rabbitMQProducer.RabbitMqProducerService",
-      "un_deploy_name" : "producer",
+      "un_deploy_name": "producer",
       "queue_name": "queue2",
+      "status": 1
+    },
+    {
+      "name": "com.example.demo.restartVerticle.newVerticle",
+      "un_deploy_name": "newVerticle",
       "status": 1
     }
   ]
