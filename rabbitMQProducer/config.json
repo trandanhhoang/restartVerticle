@@ -1,0 +1,38 @@
+{
+  "queue_name_reply": "queue2.reply-to",
+  "config_rabbit_mq": "amqp://localhost:5673",
+  "deploy": {
+    "name": [
+      "consumer_vertical",
+      "producer_verticle"
+    ]
+  },
+  "consumer_vertical": {
+    "name": "com.example.demo.rabbitMQConsumer.RabbitMqConsumerService",
+    "data": "hehe",
+    "queue_name": "queue2",
+    "queue_name_reply": "queue2.reply-to",
+    "config_rabbit_mq": "amqp://localhost:5673"
+  },
+  "producer_verticle": {
+    "name": "com.example.demo.rabbitMQProducer.RabbitMqProducerService",
+    "queue_name": "queue2"
+  },
+  "deploy2": [
+    {
+      "name": "com.example.demo.rabbitMQConsumer.RabbitMqConsumerService",
+      "un_deploy_name" : "consumer",
+      "data": "hehe",
+      "queue_name": "queue2",
+      "queue_name_reply": "queue2.reply-to",
+      "config_rabbit_mq": "amqp://localhost:5673",
+      "status": 0
+    },
+    {
+      "name": "com.example.demo.rabbitMQProducer.RabbitMqProducerService",
+      "un_deploy_name" : "producer",
+      "queue_name": "queue2",
+      "status": 1
+    }
+  ]
+}
