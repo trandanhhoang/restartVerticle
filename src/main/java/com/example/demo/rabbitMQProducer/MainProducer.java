@@ -40,22 +40,5 @@ public class MainProducer {
             }
         });
 
-//        vertx.deployVerticle(new RabbitMqProducerService(), res -> {
-//            if (res.succeeded()) {
-//                deploymentID[0] = res.result();
-//                System.out.println("Deployment is " + res.result());
-//            } else {
-//                System.out.println("Deployment failed");
-//            }
-//        });
-//        vertx.setTimer(5000, id->{
-//            vertx.undeploy(deploymentID[0],res->{
-//                if (res.succeeded()) {
-//                    System.out.println("Undeploy OKE");
-//                } else {
-//                    System.out.println("Undeploy failed");
-//                }
-//            });
-//        });
     }
 }
